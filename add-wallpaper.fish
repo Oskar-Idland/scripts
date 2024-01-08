@@ -1,22 +1,40 @@
+
 #!/usr/bin/fish
 ####################################################################################
 # Functions which copies an image from the wallpaper folder into chosen theme folder
 ####################################################################################
 
 function add-wallpaper
-    set img "$argv[1]"
+    # set img "$argv[1]"
     set img_path "$HOME/Pictures/Wallpapers/"
     set theme_path "$HOME/.config/swww/"
+
+    # Creating list of images to choose from
+    set -l img_options
+    for image in $img_path*.png $img_path*.jpg
+        set -a img_options (basename  $image)
+    end
+
+    # Displaying list of images to choose from
+    set img (printf "%s\n" $img_options | fzf --prompt="Select image: ")
+    if test -n "$img"
+        clear
+    else
+        clear
+        echo "No image selected."
+        exit 1
+    end
     
-    set -l options 
-        for folder in $theme_path*
-            echo $folder
-            if test -d $folder
-                set -a options (basename $folder)
-            end
+    # Creating list of themes to choose from
+    set -l theme_options 
+    for folder in $theme_path*
+        if test -d $folder
+            set -a theme_options (basename $folder)
         end
-        
-    set selected (printf "%s\n" $options | fzf --prompt="Select an option: ")
+    end
+
+    # Displaying list of images to choose from
+    set selected (printf "%s\n" $theme_options | fzf --prompt="Select an option: ")
     if test -n "$selected"
         clear
         cp $img_path$img $theme_path$selected/$img && 
@@ -27,3 +45,4 @@ function add-wallpaper
         echo "No option selected."
     end
 end
+
