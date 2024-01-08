@@ -6,21 +6,20 @@
 function add-wallpaper
     set img "$argv[1]"
     set img_path "$HOME/Pictures/Wallpapers/"
+    set theme_path "$HOME/.config/swww/"
     
-    set options "Catppuccin-Mocha" \
-                "Graphite-Mono" \
-                "Tokyo-Night" \
-                "Rose-Pine" \
-                "Gruvbox-Retro" \
-                "Material-Sakura" \
-                "Decay-Green" \
-                "Cyberpunk-Edge" \
-                "Frosted-Glass" \
-                "Catppuccin-Latte"
+    set -l options 
+        for folder in $theme_path*
+            echo $folder
+            if test -d $folder
+                set -a options (basename $folder)
+            end
+        end
+        
     set selected (printf "%s\n" $options | fzf --prompt="Select an option: ")
     if test -n "$selected"
         clear
-        cp $img_path$img $HOME/.config/swww/$selected/$img && 
+        cp $img_path$img $theme_path$selected/$img && 
         echo "Added" $img "to" $selected"-theme"
         
     else
