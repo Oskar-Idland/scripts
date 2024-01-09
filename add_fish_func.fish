@@ -25,7 +25,7 @@ function add-wallpaper
     else
         clear
         echo "No image selected."
-        exit 1
+        exit
     end
     
     # Creating list of themes to choose from
