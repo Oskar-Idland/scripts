@@ -3,6 +3,7 @@ import webbrowser
 import base64
 import requests
 import json
+from termcolor import cprint
 
 
 TOKEN = 'sl.BXwDzSv36QH-bc0THU7-JI7GHcVr94OL4BfBb1f1y_D6oECzWPlK5S9kDuSahme7JDz2tmotKWCyLpr4q5iD-sATh95qnPSYQIP3RCK27oMxSRt4WdJnpS-i8vF3rl_AtpiZ85nRWsGX'
@@ -72,7 +73,6 @@ def list_files_in_folder(DBX):
         print(f"------------ Listing Files in Folder '{ÅR}' ------------")
           
         for file in files:
-              
             # listing
             print(file.name)
               
@@ -82,45 +82,56 @@ def list_files_in_folder(DBX):
         print(str(e))
   
 
-
-
-def generate_folders(DBX, uke):
-    try:
-        main_str = f'/Mobile Uploads/{ÅR}/Uke {uke}'
-        
-        DBX.files_create_folder_v2(main_str)
-
-        DBX.files_create_folder_v2(f'{main_str}/mandag uke {uke}')
-        DBX.files_create_folder_v2(f'{main_str}/tirsdag uke {uke}')
-        DBX.files_create_folder_v2(f'{main_str}/onsdag uke {uke}')
-        DBX.files_create_folder_v2(f'{main_str}/torsdag uke {uke}')
-        DBX.files_create_folder_v2(f'{main_str}/fredag uke {uke}')
-        
-        print(f'Folder named "Uke {uke}" created successfully')
-        list_files_in_folder(DBX)
-        
-    except Exception as e:
-        if "CreateFolderError('path', WriteError('conflict', WriteConflictError('folder', None))))" in str(e):
-            print('Folder already exists!!!!')
-            files = DBX.files_list_folder(FOLDER_PATH).entries
-            print(f"------------Listing Files in Folder '{ÅR}' ------------ ")
+def generate_folders(DBX, uker):
+    nye_uker = []
+    for uke in uker.split():
+        uke = int(uke)
+        try:
+            main_str = f'/Mobile Uploads/{ÅR}/Uke {uke}'
             
-            for file in files:
-                if file.name == f'Uke {uke}':
-                    print(f'{file.name} <- Look here dumbo')
-                else:
-                # listing
-                    print(file.name)
-            return
-        
-        print('Error! Could not create folders')
-        print('-------------------------------')
-        print(e)
-        
+            DBX.files_create_folder_v2(main_str)
+
+            DBX.files_create_folder_v2(f'{main_str}/01 mandag uke {uke}')
+            DBX.files_create_folder_v2(f'{main_str}/02 tirsdag uke {uke}')
+            DBX.files_create_folder_v2(f'{main_str}/03 onsdag uke {uke}')
+            DBX.files_create_folder_v2(f'{main_str}/04 torsdag uke {uke}')
+            DBX.files_create_folder_v2(f'{main_str}/05 fredag uke {uke}')
+
+            nye_uker.append(f'Uke {uke}'
+            )
+        except Exception as e:
+            if "CreateFolderError('path', WriteError('conflict', WriteConflictError('folder', None))))" in str(e):
+                print()
+                print('Folder already exists!!!!')
+                files = DBX.files_list_folder(FOLDER_PATH).entries
+                print(f"------------Listing Files in Folder '{ÅR}' ------------ ")
+                
+                for file in files:
+                    if file.name == f'Uke {uke}':
+                        cprint(f'{file.name} <- Look here dumbo', "red", attrs=["bold"])
+                    else:
+                        # listing
+                        print(file.name)
+            else:
+                print('Error! Could not create folders')
+                print('-------------------------------')
+                print(e)
+
+    print()
+    cprint(f'Folders created successfully', "green", attrs=["bold"])
+    print(f"------------Listing Files in Folder '{ÅR}' ------------ ")
+    files = DBX.files_list_folder(FOLDER_PATH).entries
+    for file in files:
+        if file.name in nye_uker:
+            cprint(f'{file.name} <-', "green", attrs=["bold"])
+        else:
+            # listing
+            print(file.name)
+            
 if __name__ == '__main__':
     # get_access_code()
     # REFRESH_TOKEN = get_refresh_token()
     DBX = connect_to_dropbox(REFRESH_TOKEN)
     list_files_in_folder(DBX)
-    uke = int(input('Uke: '))
-    generate_folders(DBX, uke)
+    uker = input('Uke(r): ')
+    generate_folders(DBX, uker)
