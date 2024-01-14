@@ -104,7 +104,7 @@ def generate_folders(DBX, uker):
                 print()
                 print('Folder already exists!!!!')
                 files = DBX.files_list_folder(FOLDER_PATH).entries
-                print(f"------------Listing Files in Folder '{ÅR}' ------------ ")
+                print(f"------------ Listing Files in Folder '{ÅR}' ------------ ")
                 
                 for file in files:
                     if file.name == f'Uke {uke}':
@@ -119,7 +119,7 @@ def generate_folders(DBX, uker):
 
     print()
     cprint(f'Folders created successfully', "green", attrs=["bold"])
-    print(f"------------Listing Files in Folder '{ÅR}' ------------ ")
+    print(f"------------ Listing Files in Folder '{ÅR}' ------------ ")
     files = DBX.files_list_folder(FOLDER_PATH).entries
     for file in files:
         if file.name in nye_uker:
