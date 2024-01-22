@@ -10,7 +10,7 @@ function add-wallpaper
 
     # Creating list of images to choose from
     set -l img_options
-    for image in $img_path*.png $img_path*.jpg
+    for image in $img_path*.png $img_path*.jpg $img_path*.gif
         set -a img_options (basename  $image)
     end
 
