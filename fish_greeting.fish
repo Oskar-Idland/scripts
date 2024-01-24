@@ -1,3 +1,4 @@
 function fish_greeting
-    neofetch --ascii_distro Arch_small
+    sleep 0.01
+    neofetch --ascii_distro Arch
 end
