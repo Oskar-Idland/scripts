@@ -2,7 +2,7 @@
 
 # Set the base directory to the current working directory
 function gitcheck
-    set base_directory (pwd)
+    set -g base_directory (pwd)
 
     # Function to print colored text
     function echo_color
