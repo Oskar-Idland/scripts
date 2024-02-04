@@ -1,7 +1,9 @@
 #!/usr/bin/fish
 
-# Set the base directory to the current working directory
-function gitcheck
+### Folder Status  ###
+
+# Gets the status of all git repos 1 and 2 levels depp
+function fs
     set -g base_directory (pwd)
 
     # Function to print colored text
