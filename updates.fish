@@ -52,6 +52,6 @@ function updates
     checkupdates 
 
     # AUR updates
-    set_color $main_color ; printf "\nAUR:" ; set_color normal
+    set_color $main_color ; printf "\nAUR:\n" ; set_color normal
     yay -Qua
 end
