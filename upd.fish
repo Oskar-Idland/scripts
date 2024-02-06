@@ -1,4 +1,4 @@
-function updates
+function upd
     # Color definitions
     set main_color  "brcyan"
     set date_color  "brmagenta"
