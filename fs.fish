@@ -4,33 +4,11 @@
 
 # Gets the status of all git repos 1 and 2 levels depp
 function fs
-    set base_directory (pwd) # Begin searching from where the command was called
-    set depht 3              # How many levels deep to search for repos
-    
+    set -g base_directory (pwd) # Begin searching from where the command was called
+    set depht 3                 # How many levels deep to search for repos
+
     loop_and_check $base_directory $depht 
 end
-
-
-# Function to translate Git status symbols
-function translate_git_status
-    switch $argv[1]
-        case "M"
-            echo "Modified"
-        case "A"
-            echo "Added"
-        case "D"
-            echo "Deleted"
-        case "R"
-            echo "Renamed"
-        case "??"
-            echo "Untracked"
-        case ""
-            echo "No changes"
-        case "*"
-            echo "Unknown"
-    end
-end
-
 
 # Function to loop over folders and check Git status
 function loop_and_check
@@ -113,5 +91,26 @@ function echo_color
             echo -e (set_color red)$argv[2](set_color normal)
         case "*"
             echo $argv[2]
+    end
+end
+
+
+# Function to translate Git status symbols
+function translate_git_status
+    switch $argv[1]
+        case "M"
+            echo "Modified"
+        case "A"
+            echo "Added"
+        case "D"
+            echo "Deleted"
+        case "R"
+            echo "Renamed"
+        case "??"
+            echo "Untracked"
+        case ""
+            echo "No changes"
+        case "*"
+            echo "Unknown"
     end
 end
