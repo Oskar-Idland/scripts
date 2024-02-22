@@ -1,12 +1,12 @@
 function upd
     # Color definitions
-    set main_color  "brcyan"
+    set main_color  "fish_color_cwd"
     set date_color  "brmagenta"
     set link_color  "blue"    
     set error_color "red"
 
     # News Header
-    set_color $main_color ; echo "News:" ; set_color normal
+    set_color $$main_color ; echo "News:" ; set_color normal
 
     # Assigning as mulitilne string ensures newlines come along
     # Redirecting erros to handle it myself
@@ -48,10 +48,20 @@ function upd
     end
     
     # Pacman updates
-    set_color $main_color ; printf "PACMAN:\n" ; set_color normal
-    checkupdates 
+    set_color $$main_color ; printf "PACMAN: " ; set_color normal ;
+    set p_upd (checkupdates | string split0) 
+    set num_pac_packages (string split "\n" $p_upd | count)
+    echo $num_pac_packages
+    echo $p_upd
 
     # AUR updates
-    set_color $main_color ; printf "\nAUR:\n" ; set_color normal
-    yay -Qua
+    set_color $$main_color ; printf "AUR: " ; set_color normal
+    set a_upd (yay -Qua --color always | string split0)
+    set num_aur_packages (string split "\n" $a_upd | count)
+    echo $num_aur_packages
+    echo $a_upd
+
+    # Total number of updates
+    set_color $$main_color ; printf "Total: " ; set_color normal
+    printf "%d\n" (math $num_pac_packages + $num_aur_packages) 
 end
