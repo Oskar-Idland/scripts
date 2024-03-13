@@ -49,17 +49,17 @@ function upd
     
     # Pacman updates
     set_color $$main_color ; printf "PACMAN: " ; set_color normal ;
-    set p_upd (checkupdates | string split0) 
+    set p_upd (checkupdates | string collect) 
     set num_pac_packages (string split "\n" $p_upd | count)
-    echo $num_pac_packages
-    echo $p_upd
+    printf "$num_pac_packages\n"
+    printf "$p_upd\n\n"
 
     # AUR updates
     set_color $$main_color ; printf "AUR: " ; set_color normal
-    set a_upd (yay -Qua --color always | string split0)
+    set a_upd (paru -Qua --color always | string collect)
     set num_aur_packages (string split "\n" $a_upd | count)
-    echo $num_aur_packages
-    echo $a_upd
+    printf "$num_aur_packages\n"
+    printf "$a_upd\n\n"
 
     # Total number of updates
     set_color $$main_color ; printf "Total: " ; set_color normal
