@@ -8,8 +8,8 @@ function restore-links
     # Fish
     ## Config
     set_color green ; echo "Fish Config" ; set_color normal
-    echo "Creating symlink: $conf_dir/config.fish -> ~$dots_dir/config.fish"
-    rm ~/.config/fish/config.fish
+    echo "Creating symlink: $conf_dir/config.fish -> $dots_dir/config.fish"
+    #rm ~/.config/fish/config.fish
     ln -s $dots_dir/config.fish $conf_dir/fish/config.fish
 
     ## Functions
@@ -18,15 +18,24 @@ function restore-links
         set name (string split "/" $file)[-1]
         echo "Creating symlink: ~/.config/fish/functions/$name -> $file"
         ln -s $file $conf_dir/fish/functions/$name
+    end
 
     # Kitty
-    set_color green ; echo "Kitty Config" set_color normal ;
+    set_color green ; echo "Kitty Config" ; set_color normal
     echo "Creating symlink: $conf_dir/kitty/kitty.conf -> $dots_dir/kitty.conf"
-    rm $conf_dir/kitty/kitty.conf
+    #rm $conf_dir/kitty/kitty.conf
     ln -s $dots_dir/kitty.conf $conf_dir/kitty/kitty.conf
 
     # Neofetch
-    set_color green ; echo "Neofetch Config" set_color normal ;
+    set_color green ; echo "Neofetch Config" ; set_color normal
     echo "Creating symlink: $conf_dir/neofetch/config.conf -> $dots_dir/neofetch_config.conf"
+    #rm $conf_dir/neofetch/config.conf
     ln -s $dots_dir/neofetch_config.conf $conf_dir/neofetch/config.conf     
+
+    # Waybar
+    set_color green ; echo "Waybar Config" ; set_color normal
+    ## Clock
+    echo "Creating symlink: $conf_dir/waybar/modules/clock.jsonc -> $dots_dir/waybar_clock.jsonc"
+    #rm $conf_dir/waybar/modules/clock.jsonc
+    ln -s $dots_dir/waybar_clock.jsonc $conf_dir/waybar/modules/clock.jsonc
 end
