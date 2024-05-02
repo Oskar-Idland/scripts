@@ -35,7 +35,7 @@ function check_git_status
     set folder $argv[1]
     set relative_path_untrimmed (realpath --relative-to=$base_directory $folder)
     set relative_path (string replace -a "/home/$USER" "~" $relative_path_untrimmed)
-    echo_color "white" "Git status for $relative_path:"
+    echo_color "white" " $relative_path:"
     cd $folder
     set git_status (git status --porcelain)
     set git_status_list (string split '\n' $git_status)
@@ -63,20 +63,20 @@ function check_git_status
             if test -n "$file_name"
                 switch $status_symbol
                     case "A"
-                        echo_color "green" (printf "%-12s %-s\n" "$translated_status:" "$file_name")
+                        echo_color "green"  (printf "%-s %-s\n" "$translated_status" "$file_name")
                     case "M" "R"
-                        echo_color "yellow" (printf "%-12s %-s\n" "$translated_status:" "$file_name")
+                        echo_color "yellow" (printf "%-s %-s\n" "$translated_status" "$file_name")
                     case "D" "??"
-                        echo_color "red" (printf "%-12s %-s\n" "$translated_status:" "$file_name")
+                        echo_color "red"    (printf "%-s %-s\n" "$translated_status" "$file_name")
                     case "*"
-                        echo_color "red" (printf "%-12s %-s\n" "$translated_status:" "$file_name")
+                        echo_color "red"    (printf "%-s %-s\n" "$translated_status" "$file_name")
                 end
             end
         end
     end
 
     cd $base_directory
-    echo_color "*" "==========="
+    echo_color "*" "---"
 end
 
 
@@ -99,18 +99,18 @@ end
 function translate_git_status
     switch $argv[1]
         case "M"
-            echo "Modified"
+            echo "Modified:  "
         case "A"
-            echo "Added"
+            echo "Added:     "
         case "D"
-            echo "Deleted"
+            echo "Deleted:   "
         case "R"
-            echo "Renamed"
+            echo "Renamed:   "
         case "??"
-            echo "Untracked"
+            echo "Untracked: "
         case ""
-            echo "No changes"
+            echo "No changes:"
         case "*"
-            echo "Unknown"
+            echo "Unknown:   "
     end
 end

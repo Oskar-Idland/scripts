@@ -6,7 +6,7 @@
 function add-wallpaper
     # set img "$argv[1]"
     set img_path "$HOME/Pictures/Wallpapers/"
-    set theme_path "$HOME/.config/swww/"
+    set theme_path "$HOME/.config/hyde/themes/"
 
     # Creating list of images to choose from
     set -l img_options
@@ -35,7 +35,7 @@ function add-wallpaper
     set selected (printf "%s\n" $theme_options | fzf --height=25% --layout=reverse --border  --prompt="Select an option: ")
     if test -n "$selected"
         clear
-        cp $img_path$img $theme_path$selected/$img && 
+        cp $img_path$img $theme_path$selected/wallpapers/$img && 
         echo "Added" $img "to" $selected"-theme"
         return
         
