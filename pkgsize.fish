@@ -25,8 +25,7 @@ function pkgsize
     head -n(math $num +1) $tmp > $location
     
     # Print the table
-    cat $location | tail -n +2 | nl --number-format ln |column -t -N " ,Name,Installed_Size,Depends_On,Full_Size,Used_By,Shared_Size,Relative_Size"
-    echo 
+    cat $location | tail -n +2 | nl | column -t -N "#,Name,Installed_Size,Depends_On,Full_Size,Used_By,Shared_Size,Relative_Size" -R "1,3,4,5,6,7,8" -H '8' -W "2"
 end
 
 function print_error
