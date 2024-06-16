@@ -5,4 +5,5 @@ function fish_greeting
     #fastfetch -c examples/12.jsonc
     #fastfetch -c examples/2.jsonc
     #fastfetch -c examples/6.jsonc
+    fastfetch
 end
