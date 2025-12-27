@@ -22,15 +22,15 @@ function restore-links
 
     # Kitty
     set_color green ; echo "Kitty Config" ; set_color normal
-    echo "Creating symlink: $conf_dir/kitty/kitty.conf -> $dots_dir/kitty.conf"
+    echo "Creating symlink: $conf_dir/kitty/userprefs.conf -> $dots_dir/kitty.conf"
     #rm $conf_dir/kitty/kitty.conf
-    ln -fs $dots_dir/kitty.conf $conf_dir/kitty/kitty.conf
+    ln -fs $dots_dir/kitty.conf $conf_dir/kitty/userprefs.conf
 
-    # Neofetch
+    # Fastfetch
     set_color green ; echo "Neofetch Config" ; set_color normal
-    echo "Creating symlink: $conf_dir/neofetch/config.conf -> $dots_dir/neofetch_config.conf"
+    echo "Creating symlink: $conf_dir/fastfetch/config.jsonc -> $dots_dir/fastfetch_config.jsonc"
     #rm $conf_dir/neofetch/config.conf
-    ln -fs $dots_dir/neofetch_config.conf $conf_dir/neofetch/config.conf     
+    ln -fs $dots_dir/fastfetch_config.jsonc $conf_dir/fastfetch/config.jsonc     
 
     # Waybar
     set_color green ; echo "Waybar Config" ; set_color normal
@@ -38,4 +38,18 @@ function restore-links
     echo "Creating symlink: $conf_dir/waybar/modules/clock.jsonc -> $dots_dir/waybar_clock.jsonc"
     #rm $conf_dir/waybar/modules/clock.jsonc
     ln -fs $dots_dir/waybar_clock.jsonc $conf_dir/waybar/modules/clock.jsonc
+ set_color normal
+ 
+    ## Style
+    echo "Creating symlink: $conf_dir/waybar/style.css -> $dots_dir/waybar_style.css"
+    #rm $conf_dir/waybar/modules/clock.jsonc
+    ln -fs $dots_dir/waybar_style.css $conf_dir/waybar/style.css
+ set_color normal
+ 
+    ## Window
+    echo "Creating symlink: $conf_dir/waybar/modules/window.jsonc -> $dots_dir/waybar_window.jsonc"
+    #rm $conf_dir/waybar/modules/clock.jsonc
+    ln -fs $dots_dir/waybar_window.jsonc $conf_dir/waybar/modules/window.jsonc
+ set_color normal
+
 end

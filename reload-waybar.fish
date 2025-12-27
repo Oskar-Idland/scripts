@@ -1,7 +1,7 @@
-#########################
-# Reloads waybar config
-#########################
+##################
+# Reloads waybar #
+##################
 
 function reload-waybar
-    killall -SIGUSR2 waybar
+    pkill waybar & hyprctl dispatch exec waybar
 end
