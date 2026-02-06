@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 ##################
 # Reloads waybar #
 ##################
