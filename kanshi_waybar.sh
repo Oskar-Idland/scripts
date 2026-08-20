@@ -1,1 +1,1 @@
-pkill waybar & hyprctl dispatch exec waybar
+pkill waybar
